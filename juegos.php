@@ -1,7 +1,7 @@
 <!--<?php
 
 include "conexion.php";
-$consulta="SELECT imagen,descripcion,plataforma,cantidad,precio from juego";
+$consulta="SELECT imagen,nombre,descripcion,plataforma,cantidad,precio from juego";
 $filas= mysqli_query($conexion, $consulta);
 
 ?>-->
@@ -28,35 +28,10 @@ $filas= mysqli_query($conexion, $consulta);
         <div class="intermedio">
             <h1 ><span class="letra">Selecciona Tus Juegos</span></h1>
         </div>
-	
-        <div class="derecha">
-            <h1><span class="lados">Juegos Seleccionados</span></h1>
-
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>plataforma</th>
-                </tr>
-
-                
-          <!--     <?php
-                
-             while($columna=mysqli_fetch_assoc($filas)){
-                                      
-                   /* echo"<td>$columna[nombre]</td>";
-                    echo"<td>$columna[descripcion]</td>";
-                    echo"<td>$columna[plataforma]</td>";
-                    echo"<td>$columna[cantidad]</td>";
-                    echo"<td>$columna[precio]</td>";
-                    echo "</tr>";*/
-                }
-                ?>-->
-            </table>        
-        </div>
     
         <div class="izquierda">
             <h1 ><span class="lados">Aparta tus Juegos</span></h1>
-            <form action="/dw/videojuegos/insertar_cliente.php" method="POST">
+            <form action="/dw/videojuegos/insertar_cliente.php" method="POST" >
                 <label >Nombre:</label>
                 <input name="nombre" type="text" >
                 <br><br>
@@ -66,27 +41,55 @@ $filas= mysqli_query($conexion, $consulta);
                 <label >Telefono:</label>
                 <input name="telefono" type="number" >
                 <br><br>
-                <input type="submit" value="Aceptar" >
+                <input type="submit" value="Aceptar" id="aceptar_d">
+
                 <br><br>
                 <p>Primero selecciona los juegos que quieres apartar,luego diligencia el formulario </p>
             </form>
         </div>
+        <form id="obtener_nombre" name ="obtener" method="POST" action="actualizar_cantidad.php">
         <?php
         include "conexion.php";
-        $consulta="SELECT imagen,descripcion,plataforma,cantidad,precio from juego";
+        $consulta="SELECT imagen,nombre,descripcion,plataforma,cantidad,precio from juego";
         $filas= mysqli_query($conexion, $consulta);
         while($columna=mysqli_fetch_assoc($filas)){
 
             echo '<div class="imagen">';
             echo "<img src='$columna[imagen]'/>";
-            echo "<label class='tama'>Descripcion=$columna[descripcion]</label>";
-            echo "<label class='tama'>Plataforma=$columna[plataforma]</label>";
+            /*echo "<label class='tama'>$columna[nombre]</label>";*/
+            echo "<label class='tama'>$columna[descripcion]</label>";
+            echo "<label class='tama'>$columna[plataforma]</label>";
             echo "<label class='tama'>Cantidad=$columna[cantidad]</label>";
             echo "<label class='tama'>Precio=$ $columna[precio]</label>";
-            echo "<input type='radio' >";
+            echo "<input type='checkbox' name='probando[]' value='$columna[nombre]'>";
             echo '</div>'; 
         }
         ?>
+        
+        </form>
+        <?php echo"<script type='text/javascript'>
+            var form= document.getElementById('obtener_nombre');
+            var divs= form.getElementsByTagName('div');
+            var aceptar= document.getElementById('aceptar_d');
+            for(var i=0;i<divs.length;i++){
+                var radios= divs[i].getElementsByTagName('input');
+                var seleccion=radios[0];
+                /*if(se.type == 'radio' && se.checked == false){
+                    se.checked= true;
+                }*/
+                seleccion.onclick =function(){
+                    
+                    document.obtener.submit();
+
+                }
+                
+
+            }  " ?>                                            
+                    
+                
+            
+
+        </script>   
     </div>
 
 </div>
