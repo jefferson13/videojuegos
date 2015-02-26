@@ -18,7 +18,7 @@ $filas= mysqli_query($conexion, $consulta);
 <div class="General">
 
     <div class="logo">
-       <img src="otros/joystick.png" alt="games" class="logo_margen" /> 
+	   <img src="otros/joystick.png" alt="games" class="logo_margen" /> 
         <h1 class="logo_margen">Games Unillanos</h1>
 
     </div>
@@ -28,7 +28,7 @@ $filas= mysqli_query($conexion, $consulta);
         <div class="intermedio">
             <h1 ><span class="letra">Selecciona Tus Juegos</span></h1>
         </div>
-    
+	
         <div class="derecha">
             <h1><span class="lados">Juegos Seleccionados</span></h1>
 
@@ -42,16 +42,7 @@ $filas= mysqli_query($conexion, $consulta);
           <!--     <?php
                 
              while($columna=mysqli_fetch_assoc($filas)){
-                    echo"<tr>";
-                    echo '<div class="imagen">';
-                    echo "<img src='$columna[imagen]'/>";
-                    echo "<label class='tama'>$columna[descripcion]</label>";
-                    echo "<label class='tama'>$columna[plataforma]</label>";
-                    echo "<label class='tama'>$columna[cantidad]</label>";
-                    echo "<label class='tama'>$columna[precio]</label>";
-                    echo "<input type='radio' >";
-                    echo '</div>';
-                    
+                                      
                    /* echo"<td>$columna[nombre]</td>";
                     echo"<td>$columna[descripcion]</td>";
                     echo"<td>$columna[plataforma]</td>";
@@ -88,10 +79,10 @@ $filas= mysqli_query($conexion, $consulta);
 
             echo '<div class="imagen">';
             echo "<img src='$columna[imagen]'/>";
-            echo "<label class='tama'>$columna[descripcion]</label>";
-            echo "<label class='tama'>$columna[plataforma]</label>";
-            echo "<label class='tama'>$columna[cantidad]</label>";
-            echo "<label class='tama'>$columna[precio]</label>";
+            echo "<label class='tama'>Descripcion=$columna[descripcion]</label>";
+            echo "<label class='tama'>Plataforma=$columna[plataforma]</label>";
+            echo "<label class='tama'>Cantidad=$columna[cantidad]</label>";
+            echo "<label class='tama'>Precio=$ $columna[precio]</label>";
             echo "<input type='radio' >";
             echo '</div>'; 
         }
