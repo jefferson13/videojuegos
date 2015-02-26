@@ -56,7 +56,6 @@ $filas= mysqli_query($conexion, $consulta);
 
             echo '<div class="imagen">';
             echo "<img src='$columna[imagen]'/>";
-            /*echo "<label class='tama'>$columna[nombre]</label>";*/
             echo "<label class='tama'>$columna[descripcion]</label>";
             echo "<label class='tama'>$columna[plataforma]</label>";
             echo "<label class='tama'>Cantidad=$columna[cantidad]</label>";
@@ -74,17 +73,18 @@ $filas= mysqli_query($conexion, $consulta);
             for(var i=0;i<divs.length;i++){
                 var radios= divs[i].getElementsByTagName('input');
                 var seleccion=radios[0];
-                /*if(se.type == 'radio' && se.checked == false){
-                    se.checked= true;
-                }*/
                 seleccion.onclick =function(){
                     
                     document.obtener.submit();
 
+
                 }
                 
 
-            }  " ?>                                            
+            }
+
+
+              " ?>                                            
                     
                 
             
