@@ -1,16 +1,8 @@
-<!--<?php
-
-include "conexion.php";
-$consulta="SELECT imagen,nombre,descripcion,plataforma,cantidad,precio from juego";
-$filas= mysqli_query($conexion, $consulta);
-
-?>-->
-
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<link href="otros/style.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
 <title>Juegos Unillanos</title>
 </head>
 <body>
@@ -18,7 +10,7 @@ $filas= mysqli_query($conexion, $consulta);
 <div class="General">
 
     <div class="logo">
-	   <img src="otros/joystick.png" alt="games" class="logo_margen" /> 
+	   <img src="imagenes/joystick.png" alt="games" class="logo_margen" /> 
         <h1 class="logo_margen">Games Unillanos</h1>
 
     </div>
@@ -26,46 +18,37 @@ $filas= mysqli_query($conexion, $consulta);
     <div class="wrap">
     
         <div class="intermedio">
-            <h1 ><span class="letra">Selecciona Tus Juegos</span></h1>
+            <ul>
+                <li><a href="">General</a></li>
+                <li><a href="">Armas</a></li>
+                <li><a href="">Carros</a></li>
+                <li><a href="">Deporte</a></li>
+                <li><a href="">Aventura</a></li>
+                <li><a href="">Cruzadas</a></li>
+    </ul>
         </div>
-    
-        <div class="izquierda">
-            <h1 ><span class="lados">Aparta tus Juegos</span></h1>
-            <form action="/dw/videojuegos/insertar_cliente.php" method="POST" >
-                <label >Nombre:</label>
-                <input name="nombre" type="text" >
-                <br><br>
-                <label >Cedula:</label>
-                <input name="cedula" type="text" >
-                <br><br>
-                <label >Telefono:</label>
-                <input name="telefono" type="number" >
-                <br><br>
-                <input type="submit" value="Aceptar" id="aceptar_d">
-
-                <br><br>
-                <p>Primero selecciona los juegos que quieres apartar,luego diligencia el formulario </p>
-            </form>
-        </div>
+  
+        <article >
         <form id="obtener_nombre" name ="obtener" method="POST" action="actualizar_cantidad.php">
         <?php
         include "conexion.php";
-        $consulta="SELECT imagen,nombre,descripcion,plataforma,cantidad,precio from juego";
+        $consulta="SELECT imagen,nombre from juego";
         $filas= mysqli_query($conexion, $consulta);
         while($columna=mysqli_fetch_assoc($filas)){
 
             echo '<div class="imagen">';
             echo "<img src='$columna[imagen]'/>";
-            echo "<label class='tama'>$columna[descripcion]</label>";
+            /*echo "<label class='tama'>$columna[descripcion]</label>";
             echo "<label class='tama'>$columna[plataforma]</label>";
             echo "<label class='tama'>Cantidad=$columna[cantidad]</label>";
             echo "<label class='tama'>Precio=$ $columna[precio]</label>";
-            echo "<input type='checkbox' name='probando[]' value='$columna[nombre]'>";
+            echo "<input type='checkbox' name='probando[]' value='$columna[nombre]'>";*/
             echo '</div>'; 
         }
         ?>
         
         </form>
+        </article>
         <?php echo"<script type='text/javascript'>
             var form= document.getElementById('obtener_nombre');
             var divs= form.getElementsByTagName('div');
@@ -73,7 +56,9 @@ $filas= mysqli_query($conexion, $consulta);
             for(var i=0;i<divs.length;i++){
                 var radios= divs[i].getElementsByTagName('input');
                 var seleccion=radios[0];
+
                 seleccion.onclick =function(){
+
                     
                     document.obtener.submit();
 

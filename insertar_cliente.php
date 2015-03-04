@@ -18,3 +18,4 @@ header("Location:juegos.php");
 ?>
 
 
+	
