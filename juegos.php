@@ -12,73 +12,78 @@
     <div class="logo">
 	   <img src="imagenes/joystick.png" alt="games" class="logo_margen" /> 
         <h1 class="logo_margen">Games Unillanos</h1>
+        <?php
+        session_start();
+        if(!isset($_SESSION["session_username"])) {
+            header("location:login.php");
+        } 
+        ?>
+          <h4 class="derecha">Bienvenido, <?php echo $_SESSION['session_username'];?></h4>
+          <br><br>
+          <div class="derecha"><p><a href="logout.php">Finalice</a> sesión aquí!</p></div> 
 
     </div>
  
     <div class="wrap">
-    
         <div class="intermedio">
-            <ul>
-                <li><a href="">General</a></li>
-                <li><a href="">Armas</a></li>
-                <li><a href="">Carros</a></li>
-                <li><a href="">Deporte</a></li>
-                <li><a href="">Aventura</a></li>
-                <li><a href="">Cruzadas</a></li>
-    </ul>
-        </div>
-  
-        <article >
-        <form id="obtener_nombre" name ="obtener" method="POST" action="actualizar_cantidad.php">
-        <?php
-        include "conexion.php";
-        $consulta="SELECT imagen,nombre from juego";
-        $filas= mysqli_query($conexion, $consulta);
-        while($columna=mysqli_fetch_assoc($filas)){
-
-            echo '<div class="imagen">';
-            echo "<img src='$columna[imagen]'/>";
-            /*echo "<label class='tama'>$columna[descripcion]</label>";
-            echo "<label class='tama'>$columna[plataforma]</label>";
-            echo "<label class='tama'>Cantidad=$columna[cantidad]</label>";
-            echo "<label class='tama'>Precio=$ $columna[precio]</label>";
-            echo "<input type='checkbox' name='probando[]' value='$columna[nombre]'>";*/
-            echo '</div>'; 
-        }
-        ?>
+        <form  name="categorias" action="auxiliar.php" method="POST">
         
-        </form>
-        </article>
-        <?php echo"<script type='text/javascript'>
-            var form= document.getElementById('obtener_nombre');
-            var divs= form.getElementsByTagName('div');
-            var aceptar= document.getElementById('aceptar_d');
-            for(var i=0;i<divs.length;i++){
-                var radios= divs[i].getElementsByTagName('input');
-                var seleccion=radios[0];
+            <ul>
+             <li><a target="_self" ><input type="image" name="general"  value="General" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Cruzadas" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Armas" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Carros" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Aventura" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Deporte" /></a></li>
+             <li><a target="_self" ><input type="image" name="general"  value="Historial" /></a></li>
+            </ul>
+            </form> 
+                       
+                   
+                
+            <?php
+                $consulta="SELECT imagen,nombre from juego";
+            if(!empty($_POST['auxiliar'])){
+                $categoria=$_POST['auxiliar'];
+          
+                if($categoria=="Cruzadas"){
 
-                seleccion.onclick =function(){
-
-                    
-                    document.obtener.submit();
-
-
+                    $consulta="SELECT imagen,nombre from juego WHERE categorias_nombre='Cruzadas'";
                 }
-                
+                if($categoria=="Armas"){
 
+                    $consulta="SELECT imagen,nombre from juego WHERE categorias_nombre='Armas'";
+                }
+                if($categoria=="General"){
+
+                    $consulta="SELECT imagen,nombre from juego";
+                }
+                if($categoria=="Carros"){
+
+                    $consulta="SELECT imagen,nombre from juego WHERE categorias_nombre='Carros'";
+                }
+                if($categoria=="Deporte"){
+
+                    $consulta="SELECT imagen,nombre from juego WHERE categorias_nombre='Deporte'";
+                }
+                if($categoria=="Aventura"){
+
+                    $consulta="SELECT imagen,nombre from juego WHERE categorias_nombre='Aventura'";
+                }
             }
+                echo "<form method='POST' action='individual.php'>";
+                include "conexion.php";
 
-
-              " ?>                                            
+                $filas= mysqli_query($conexion, $consulta);
+                while($columna=mysqli_fetch_assoc($filas)){
                     
-                
-            
-
-        </script>   
-    </div>
-
+                    echo '<div class="imagen">';
+                    echo '<a  target="_self"><input type="image" name="imagen" value="'.$columna['nombre'].'" src="'.$columna['imagen'].'"/></a>';
+                    echo '</div>'; 
+                }
+            echo "</form>";    
+            ?>
+           
 </div>
 </body>
 </html>
-
-

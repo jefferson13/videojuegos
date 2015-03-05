@@ -1,4 +1,4 @@
-<?php require_once("includes/connection.php"); ?>
+<?php require_once("conexion.php"); ?>
 <?php include("includes/header.php"); ?>
 
 
@@ -7,14 +7,14 @@
 if(isset($_POST["registrar"])){
 
 
-if(!empty($_POST['nombre']) && !empty($_POST['cedula']) && !empty($_POST['telefono']) && !empty($_POST['contraseña'])) {
+if(!empty($_POST['nombre']) && !empty($_POST['cedula']) && !empty($_POST['telefono']) && !empty($_POST['pass'])) {
 	$nombre=$_POST['nombre'];
 	$cedula=$_POST['cedula'];
 	$telefono=$_POST['telefono'];
-	$contraseña=$_POST['contraseña'];
+	$pass=$_POST['pass'];
 	
 
-	include "includes/connection.php";
+	include "conexion.php";
 	$consulta="SELECT cedula FROM cliente WHERE cedula= $cedula";	
 	$fila=mysqli_query($conexion,$consulta);
 	$numrows=mysqli_num_rows($fila);
@@ -22,7 +22,7 @@ if(!empty($_POST['nombre']) && !empty($_POST['cedula']) && !empty($_POST['telefo
 	
 	if($numrows==0)
 	{
-		$sql="INSERT INTO cliente VALUES('$nombre',$cedula, $telefono, '$contraseña')";
+		$sql="INSERT INTO cliente VALUES('$nombre',$cedula, $telefono, '$pass')";
 		$result=mysqli_query($conexion,$sql);
 		$result;
 		if($result){
@@ -66,7 +66,7 @@ if(!empty($_POST['nombre']) && !empty($_POST['cedula']) && !empty($_POST['telefo
 	
 	<p>
 		<label for="user_pass">Contraseña<br />
-		<input type="password" name="contraseña" id="contraseña" class="input" value="" size="32" /></label>
+		<input type="password" name="pass" id="pass" class="input" value="" size="32" /></label>
 	</p>	
 	
 

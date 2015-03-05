@@ -9,7 +9,7 @@ session_start();
 
 if(isset($_SESSION["session_username"])){
  //echo "Session is set"; // for testing purposes
-header("Location: juegos.php");
+header("Location:juegos.php");
 }
 
 if(isset($_POST["login"])){
@@ -19,19 +19,20 @@ if(!empty($_POST['cedula']) && !empty($_POST['contraseña'])) {
     $cedula=$_POST['cedula'];
     $contraseña=$_POST['contraseña'];
 
-    include "includes/connection.php";
-    $consulta="SELECT cedula FROM cliente WHERE cedula= $cedula";  
+    include "conexion.php";
+    $consulta="SELECT cedula,pass FROM cliente WHERE cedula= $cedula and pass='$contraseña'";  
     $filas=mysqli_query($conexion,$consulta);
+    
     $numrows=mysqli_num_rows($filas);
     if($numrows!=0)
     {
     while($row=mysqli_fetch_assoc($filas))
     {
     $dbusername=$row['cedula'];
-    //$dbpassword=$row['contraseña'];
+    $dbpassword=$row['pass'];
     }
 
-    if($cedula == $dbusername )//&& $contraseña == $dbpassword)
+    if($cedula == $dbusername && $contraseña == $dbpassword)
 
     {
 
