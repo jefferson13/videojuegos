@@ -38,11 +38,21 @@ label{
 	border:1px black solid;
     
 }
+
+.centro{
+    border: 1px black solid;
+    background-color:#DBDBDB;
+    font: bold 1em "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin:5em;
+
+}
 .intermedio {
   height:40px;
   width: 100%;
   background-color:#136F86;
+  
  }
+
  .izquierda{
 	background-color:#E4E4E4;
 	border:thin solid black;
@@ -52,12 +62,8 @@ label{
 
 }
 .derecha{
-	background-color:#E4E4E4;
-	border:thin solid black;
-	height:50em;
-	width:205px;
 	float: right;
-	
+
 }
 	
 .letra{
@@ -81,9 +87,9 @@ label{
 		
 }
 .tama{
-	font: bold 10px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	
-
+    
+	font: bold 1em "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: black;
 }
 
 body {
@@ -125,9 +131,11 @@ ul li{
     margin: 10px;
     font-size: 15px;
     font: bold 10px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top: 15px;
 }
 
 ul a{
+
     padding: 9px;
     height: 5px;
     border: solid black;
@@ -135,6 +143,7 @@ ul a{
     background: #224E00;
     color: white;
     text-decoration: none;
+
 }
 
 ul a:hover{
